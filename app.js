@@ -17,6 +17,7 @@ app.use(express.static('public'));
 app.get('/imagesearch/:url', (req, res)=>{
         var url = req.params.url;
         var number = req.url
+<<<<<<< HEAD
         var currentTime = new Date();
         
         var mySearch = mongoUtil.mySearch();
@@ -27,6 +28,15 @@ app.get('/imagesearch/:url', (req, res)=>{
         if(number>0){number = number;
         } else {number = 5;}
         
+=======
+        
+        number = number.match(/\=\d+$/img);
+        number = number[0].substr(1);
+>>>>>>> 31b50bb6256c012707f9d5a515ca20fa63a49ff7
+        
+        if(number>0){
+           number = number;
+        } else {number = 5;}
         
    search.images(url, {top: number}, function(err, results){
         if (err) throw err;
