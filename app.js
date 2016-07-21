@@ -13,10 +13,12 @@ app.use(express.static('public'));
 app.get('/imagesearch/:url', (req, res)=>{
         var url = req.params.url;
         var number = req.url
-
-        if(number>0){
+        
         number = number.match(/\=\d+$/img);
         number = number[0].substr(1);
+        
+        if(number>0){
+           number = number;
         } else {number = 5;}
         
    search.images(url, {top: number}, function(err, results){
