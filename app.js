@@ -16,7 +16,7 @@ app.use(express.static('public'));
 
 app.get('/imagesearch/:url', (req, res)=>{
         var url = req.params.url;
-        var number = req.url
+        var number = req.url.offset || 5;
 
         var currentTime = new Date();
         
@@ -24,20 +24,7 @@ app.get('/imagesearch/:url', (req, res)=>{
         //et's store the search term in our db
         mySearch.insert({"term": url, "date": currentTime});
         
-        //Lets get the number of results the user wants to get.
-        if(number>0){number = number;
-        } else {number = 5;}
-        
-
-        
-        number = number.match(/\=\d+$/img);
-        number = number[0].substr(1);
-
-        
-        if(number>0){
-           number = number;
-        } else {number = 5;}
-        
+       
    search.images(url, {top: number}, function(err, results){
         if (err) throw err;
         var resultsFormatted = [];
