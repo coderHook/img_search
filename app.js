@@ -17,9 +17,17 @@ app.use(express.static('public'));
 app.get('/imagesearch/:url', (req, res)=>{
         var url = req.params.url;
         var number = req.url
-
+        var currentTime = new Date();
+        
+        var mySearch = mongoUtil.mySearch();
+        //et's store the search term in our db
+        mySearch.insert({"term": url, "date": currentTime});
+        
+        //Lets get the number of results the user wants to get.
         number = number.match(/\=\d+$/img);
         number = number[0].substr(1);
+        
+        
         
    search.images(url, {top: number}, function(err, results){
         if (err) throw err;
@@ -38,6 +46,13 @@ app.get('/imagesearch/:url', (req, res)=>{
 
 app.get('/latest/imagesearch', (req, res)=>{
     
+    var mySearch = mongoUtil.mySearch();
+
+    mySearch.find().toArray(function(err, docs){
+       if (err) throw err;
+       
+       res.send(docs.reverse());
+    });
 });
    
 app.listen(process.env.PORT || 8080, function(){
