@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/coderHook/img_search#readme",
   "dependencies": {
+    "bing.search": "^1.0.1",
     "express": "^4.14.0",
-    "mongodb": "^2.2.4"
+    "mongodb": "^2.2.4",
+    "util": "^0.10.3"
   }
 }
