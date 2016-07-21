@@ -24,9 +24,8 @@ app.get('/imagesearch/:url', (req, res)=>{
         mySearch.insert({"term": url, "date": currentTime});
         
         //Lets get the number of results the user wants to get.
-        number = number.match(/\=\d+$/img);
-        number = number[0].substr(1);
-        
+        if(number>0){number = number;
+        } else {number = 5;}
         
         
    search.images(url, {top: number}, function(err, results){
