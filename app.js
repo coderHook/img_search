@@ -14,7 +14,7 @@ app.get('/imagesearch/:url', (req, res)=>{
         var url = req.params.url;
         var number = req.url
 
-        if(number){
+        if(number>0){
         number = number.match(/\=\d+$/img);
         number = number[0].substr(1);
         } else {number = 5;}
