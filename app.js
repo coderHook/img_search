@@ -11,9 +11,13 @@ search = new search('IiZhUJHp+KJwJDxogi76Uhmlwwa4aD7VWSiz7hYybKw');
 app.use(express.static('public'));
 
 app.get('/imagesearch/:url', (req, res)=>{
-        var url =req.params.url;
+        var url = req.params.url;
+        var number = req.url
 
-   search.images(url, {top: 3}, function(err, results){
+        number = number.match(/\=\d+$/img);
+        number = number[0].substr(1);
+        
+   search.images(url, {top: number}, function(err, results){
         if (err) throw err;
         var resultsFormatted = [];
         
@@ -22,7 +26,7 @@ app.get('/imagesearch/:url', (req, res)=>{
         }
         
         res.send(resultsFormatted);
-        console.log(util.inspect(url, {colors: true, depth: null}));
+        console.log(util.inspect({"url": url, "number of searchs": number}, {colors: true, depth: null}));
     });
     
     
@@ -30,5 +34,5 @@ app.get('/imagesearch/:url', (req, res)=>{
    
 app.listen(process.env.PORT || 8080, function(){
     
-    console.log("server listening on port provided and link https://fcc-basejumps-abel1987.c9users.io" );
+    console.log("server listening on port provided and linked to https://fcc-basejumps-abel1987.c9users.io" );
 });
