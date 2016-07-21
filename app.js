@@ -4,7 +4,11 @@ var express = require('express'),
     search = require('bing.search'),
     util = require('util');
 
+var mongoUtil = require('./mongoutil.js');
+
 var app = express();
+
+mongoUtil.connect();
 
 search = new search('IiZhUJHp+KJwJDxogi76Uhmlwwa4aD7VWSiz7hYybKw');
 
@@ -29,6 +33,10 @@ app.get('/imagesearch/:url', (req, res)=>{
         console.log(util.inspect({"url": url, "number of searchs": number}, {colors: true, depth: null}));
     });
     
+    
+});
+
+app.get('/latest/imagesearch', (req, res)=>{
     
 });
    
